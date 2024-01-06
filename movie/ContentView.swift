@@ -11,25 +11,72 @@ struct ContentView: View {
     @StateObject var viewModel = MovieDBViewModel()
     
     var body: some View {
-        VStack {
+        ScrollView {
             if viewModel.trending.isEmpty {
                 Text("No Results Found")
+                    .foregroundColor(.white)
             } else {
-                ScrollView(.horizontal) {
+                ScrollView(.horizontal, showsIndicators: false) {
                     HStack {
                         ForEach(viewModel.trending) { item in
-                            Text(item.title)
+                            TrendingCard(trendingItem: item)
                         }
                     }
+                    .padding(.horizontal)
                 }
             }
         }
-        .padding()
+        .frame(maxWidth: .infinity)
+        .background(
+            Color(red: 39/255, green: 40/255, blue: 59/255)
+                .ignoresSafeArea()
+        )
         .onAppear {
             Task {
-                //await viewModel.loadTrending()
+                await viewModel.loadTrending()
             }
         }
+    }
+}
+
+struct TrendingCard: View {
+    
+    let trendingItem: TrendingItem
+    
+    var body: some View {
+        ZStack(alignment: .bottom) {
+            AsyncImage(url: trendingItem.backdropURL) { image in
+                image
+                    .resizable()
+                    .scaledToFill()
+                    .frame(width: 340, height: 200)
+            } placeholder: {
+                Rectangle()
+                    .fill(Color(red: 61/255, green: 61/255, blue: 88/255))
+                    .frame(width: 340, height: 200)
+            }
+            
+            VStack {
+                HStack {
+                    Text(trendingItem.title)
+                        .foregroundColor(.white)
+                        .fontWeight(.heavy)
+                    Spacer ()
+                    Image(systemName: "heart.fill")
+                        .foregroundColor(.red)
+                }
+                
+                HStack {
+                    Image(systemName: "hand.thumbsup.fill")
+                    Text("\(trendingItem.vote_average, specifier: "%.1f")")
+                    Spacer()
+                }
+                .foregroundColor(.yellow)
+            }
+            .padding()
+            .background(Color(red: 61/255, green: 61/255, blue: 88/255))
+        }
+        .cornerRadius(10)
     }
 }
 
@@ -71,6 +118,11 @@ struct TrendingItem: Identifiable, Decodable {
     let poster_path: String
     let title: String
     let vote_average: Float
+    let backdrop_path: String
+    
+    var backdropURL: URL {
+        return URL(string: "https://image.tmdb.org/t/p/w300\(backdrop_path)")!
+    }
 }
 
 
