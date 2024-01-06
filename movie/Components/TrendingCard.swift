@@ -9,7 +9,7 @@ import SwiftUI
 
 struct TrendingCard: View {
     
-    let trendingItem: TrendingItem
+    let trendingItem: Movie
     
     var body: some View {
         ZStack(alignment: .bottom) {
@@ -31,7 +31,6 @@ struct TrendingCard: View {
                         .fontWeight(.heavy)
                     Spacer ()
                     Image(systemName: "heart.fill")
-                        .foregroundColor(.red)
                 }
                 
                 HStack {
