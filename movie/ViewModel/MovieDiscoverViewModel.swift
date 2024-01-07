@@ -7,7 +7,7 @@
 
 import Foundation
 
-class MovieDBViewModel: ObservableObject {
+class MovieDiscoverViewModel: ObservableObject {
     
     @Published var trending: [Movie] = []
     @Published var searchResults: [Movie] = []
@@ -45,5 +45,42 @@ class MovieDBViewModel: ObservableObject {
         } catch {
             print(error.localizedDescription)
         }
+    }
+    
+}
+
+class MovieDetailsViewModel: ObservableObject {
+    
+    @Published var credits: MovieCredits?
+    
+    private let apiKey = "409d993d44e607bd146c738c9df97a95"
+    
+    func movieCredits(for movieId: Int) async {
+        let url = URL(string: "https://api.themoviedb.org/3/movie/\(movieId)/credits?api_key=\(apiKey)&language=en-US")!
+        
+        do {
+            let (data, _) = try await URLSession.shared.data(from: url)
+            let credits = try JSONDecoder().decode(MovieCredits.self, from: data)
+            
+            DispatchQueue.main.async {
+                self.credits = credits
+            }
+        } catch {
+            print(error.localizedDescription)
+        }
+    }
+    
+}
+
+struct MovieCredits: Decodable {
+    let id: Int
+    let cast: [Cast]?
+    
+    struct Cast: Decodable {
+        
+        let name: String
+        let id: Int
+        let character: String
+        
     }
 }
