@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct ContentView: View {
+struct DiscoverView: View {
     @StateObject var viewModel = MovieDBViewModel()
     
     @State var searchText = ""
@@ -31,7 +31,12 @@ struct ContentView: View {
                         ScrollView(.horizontal, showsIndicators: false) {
                             HStack {
                                 ForEach(viewModel.trending) { item in
-                                    TrendingCard(trendingItem: item)
+                                    NavigationLink {
+                                        MovieDetailView(movie: item)
+                                    } label: {
+                                        TrendingCard(trendingItem: item)
+                                    }
+
                                 }
                             }
                             .padding(.horizontal)
@@ -103,5 +108,5 @@ struct ContentView: View {
 
 
 #Preview {
-    ContentView()
+    DiscoverView()
 }
