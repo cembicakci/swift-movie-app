@@ -11,6 +11,8 @@ struct MovieDetailView: View {
     
     @Environment(\.dismiss) var dismiss
     
+    @StateObject var model = MovieDetailsViewModel()
+    
     let movie: Movie
     let headerHeight: CGFloat = 400
     
@@ -60,6 +62,23 @@ struct MovieDetailView: View {
                     Text(movie.overview)
                         .lineLimit(2)
                         .foregroundColor(.secondary)
+                    
+                    
+                    HStack {
+                        Text("Cast & Crew")
+                            .font(.title3)
+                            .fontWeight(.bold)
+                        Spacer()
+                    }
+                    
+                    ScrollView(.horizontal) {
+                        LazyHStack {
+                            ForEach(model.credits?.cast ?? []) { cast in
+                                CastView(cast: cast)
+                            }
+                        }
+                    }
+                    
                 }
                 .padding()
             }
@@ -75,6 +94,9 @@ struct MovieDetailView: View {
             }
             .padding(.leading)
         }
+        .task {
+            await model.movieCredits(for: movie.id)
+        }
         .toolbar(.hidden, for: .navigationBar)
     }
 }
@@ -83,14 +105,3 @@ struct MovieDetailView: View {
     MovieDetailView(movie: Movie.mock)
 }
 
-
-//struct CastCrewTile: View {
-//    
-//    let castCrew: CastCrew
-//    
-//    var body: some View {
-//        VStack {
-//            AsyncImage(url: castCrew, scale: <#T##CGFloat#>, content: <#T##(Image) -> View#>, placeholder: <#T##() -> View#>)
-//        }
-//    }
-//}
