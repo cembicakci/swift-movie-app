@@ -49,7 +49,6 @@ struct MovieDetailView: View {
                     }
                     
                     HStack {
-                            
                     }
                     
                     HStack {
@@ -71,9 +70,9 @@ struct MovieDetailView: View {
                         Spacer()
                     }
                     
-                    ScrollView(.horizontal) {
+                    ScrollView(.horizontal, showsIndicators: false) {
                         LazyHStack {
-                            ForEach(model.credits?.cast ?? []) { cast in
+                            ForEach(model.castProfiles) { cast in
                                 CastView(cast: cast)
                             }
                         }
@@ -96,6 +95,7 @@ struct MovieDetailView: View {
         }
         .task {
             await model.movieCredits(for: movie.id)
+            await model.loadCastProfiles()
         }
         .toolbar(.hidden, for: .navigationBar)
     }

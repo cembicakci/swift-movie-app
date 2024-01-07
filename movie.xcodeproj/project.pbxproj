@@ -19,6 +19,7 @@
 		E5F01AC12B4ABB01003FC1B0 /* CastView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5F01AC02B4ABB01003FC1B0 /* CastView.swift */; };
 		E5F01AC32B4ABB72003FC1B0 /* MovieDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5F01AC22B4ABB72003FC1B0 /* MovieDetailsViewModel.swift */; };
 		E5F01AC52B4ABB86003FC1B0 /* MovieCredits.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5F01AC42B4ABB86003FC1B0 /* MovieCredits.swift */; };
+		E5F01AC72B4AC9EF003FC1B0 /* CastProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5F01AC62B4AC9EF003FC1B0 /* CastProfile.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -35,6 +36,7 @@
 		E5F01AC02B4ABB01003FC1B0 /* CastView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CastView.swift; sourceTree = "<group>"; };
 		E5F01AC22B4ABB72003FC1B0 /* MovieDetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailsViewModel.swift; sourceTree = "<group>"; };
 		E5F01AC42B4ABB86003FC1B0 /* MovieCredits.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieCredits.swift; sourceTree = "<group>"; };
+		E5F01AC62B4AC9EF003FC1B0 /* CastProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CastProfile.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -93,6 +95,7 @@
 				E5F01ABA2B499441003FC1B0 /* TrendingResults.swift */,
 				E5F01ABC2B499455003FC1B0 /* Movie.swift */,
 				E5F01AC42B4ABB86003FC1B0 /* MovieCredits.swift */,
+				E5F01AC62B4AC9EF003FC1B0 /* CastProfile.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -196,6 +199,7 @@
 				E5F01ABB2B499441003FC1B0 /* TrendingResults.swift in Sources */,
 				E5F01AB72B49940C003FC1B0 /* TrendingCard.swift in Sources */,
 				E5F01AA72B4970FC003FC1B0 /* DiscoverView.swift in Sources */,
+				E5F01AC72B4AC9EF003FC1B0 /* CastProfile.swift in Sources */,
 				E5F01AA52B4970FC003FC1B0 /* movieApp.swift in Sources */,
 				E5F01AB92B49942F003FC1B0 /* MovieDiscoverViewModel.swift in Sources */,
 				E5F01AC52B4ABB86003FC1B0 /* MovieCredits.swift in Sources */,
