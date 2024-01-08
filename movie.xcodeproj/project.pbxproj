@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E545D8B02B4C75A5007D5E65 /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = E545D8AF2B4C75A5007D5E65 /* Network.swift */; };
 		E5F01AA52B4970FC003FC1B0 /* movieApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5F01AA42B4970FC003FC1B0 /* movieApp.swift */; };
 		E5F01AA72B4970FC003FC1B0 /* DiscoverView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5F01AA62B4970FC003FC1B0 /* DiscoverView.swift */; };
 		E5F01AA92B4970FD003FC1B0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E5F01AA82B4970FD003FC1B0 /* Assets.xcassets */; };
@@ -23,6 +24,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		E545D8AF2B4C75A5007D5E65 /* Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
 		E5F01AA12B4970FC003FC1B0 /* movie.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = movie.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E5F01AA42B4970FC003FC1B0 /* movieApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = movieApp.swift; sourceTree = "<group>"; };
 		E5F01AA62B4970FC003FC1B0 /* DiscoverView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoverView.swift; sourceTree = "<group>"; };
@@ -50,6 +52,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		E545D8AE2B4C7598007D5E65 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				E545D8AF2B4C75A5007D5E65 /* Network.swift */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
 		E5F01A982B4970FB003FC1B0 = {
 			isa = PBXGroup;
 			children = (
@@ -69,7 +79,7 @@
 		E5F01AA32B4970FC003FC1B0 /* movie */ = {
 			isa = PBXGroup;
 			children = (
-				E5F01AA62B4970FC003FC1B0 /* DiscoverView.swift */,
+				E545D8AE2B4C7598007D5E65 /* Network */,
 				E5F01AB52B4993EE003FC1B0 /* View */,
 				E5F01AB22B4993CE003FC1B0 /* Model */,
 				E5F01AB32B4993D6003FC1B0 /* ViewModel */,
@@ -121,6 +131,7 @@
 		E5F01AB52B4993EE003FC1B0 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				E5F01AA62B4970FC003FC1B0 /* DiscoverView.swift */,
 				E5F01ABE2B4AA6BB003FC1B0 /* MovieDetailView.swift */,
 			);
 			path = View;
@@ -198,6 +209,7 @@
 			files = (
 				E5F01ABB2B499441003FC1B0 /* TrendingResults.swift in Sources */,
 				E5F01AB72B49940C003FC1B0 /* TrendingCard.swift in Sources */,
+				E545D8B02B4C75A5007D5E65 /* Network.swift in Sources */,
 				E5F01AA72B4970FC003FC1B0 /* DiscoverView.swift in Sources */,
 				E5F01AC72B4AC9EF003FC1B0 /* CastProfile.swift in Sources */,
 				E5F01AA52B4970FC003FC1B0 /* movieApp.swift in Sources */,

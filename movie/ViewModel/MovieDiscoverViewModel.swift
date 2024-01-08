@@ -13,30 +13,26 @@ class MovieDiscoverViewModel: ObservableObject {
     @Published var trending: [Movie] = []
     @Published var searchResults: [Movie] = []
     
-    private let apiKey = "409d993d44e607bd146c738c9df97a95"
-    //static let token = "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI0MDlkOTkzZDQ0ZTYwN2JkMTQ2YzczOGM5ZGY5N2E5NSIsInN1YiI6IjYyMDNmYjRkNGRmMjkxMDA2OTFjM2M5MyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.DDE74BuHNhMq6eeElOXjNTkLHaBwPgPZBc_jCHjZXWg"
-    
     func loadTrending() async {
-        let url = URL(string: "https://api.themoviedb.org/3/trending/movie/day?api_key=\(apiKey)")!
-        
         do {
-            let (data, _) = try await URLSession.shared.data(from: url)
-            let trendingResults = try JSONDecoder().decode(TrendingResults.self, from: data)
+            let trendingResults: TrendingResults = try await Network.request(endpoint: "trending/movie/day", responseType: TrendingResults.self)
             self.trending = trendingResults.results
-            
         } catch {
             print(error.localizedDescription)
         }
-        
     }
-       
+    
     func search(term: String) async {
-        let url = URL(string: "https://api.themoviedb.org/3/search/movie?api_key=\(apiKey)&language=en-US&page=1&include_adult=false&query=\(term)".addingPercentEncoding(withAllowedCharacters: .urlFragmentAllowed)!)!
+        let queryItems = [
+            URLQueryItem(name: "language", value: "en-US"),
+            URLQueryItem(name: "page", value: "1"),
+            URLQueryItem(name: "include_adult", value: "false"),
+            URLQueryItem(name: "query", value: term)
+        ]
+        
         do {
-            let (data, _) = try await URLSession.shared.data(from: url)
-            let trendingResults = try JSONDecoder().decode(TrendingResults.self, from: data)
+            let trendingResults: TrendingResults = try await Network.request(endpoint: "search/movie", queryItems: queryItems, responseType: TrendingResults.self)
             self.searchResults = trendingResults.results
-            
         } catch {
             print(error.localizedDescription)
         }

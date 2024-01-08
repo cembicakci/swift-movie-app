@@ -90,8 +90,8 @@ struct DiscoverView: View {
             )
         }
         .searchable(text: $searchText)
-        .onChange(of: searchText) { newValue in
-            if newValue.count > 2 {
+        .onChange(of: searchText) { oldValue, newValue in
+            if newValue.count > 1 {
                 Task {
                     await viewModel.search(term: searchText)
                 }

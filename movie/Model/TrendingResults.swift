@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct TrendingResults: Decodable {
+struct TrendingResults: Codable {
     let page: Int
     let results: [Movie]
     let total_pages: Int
