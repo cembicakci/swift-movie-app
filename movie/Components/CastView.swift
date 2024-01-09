@@ -23,7 +23,7 @@ struct CastView: View {
                 ProgressView()
                     .frame(width: 100, height: 120)
             }
-
+            
             Text(cast.name)
                 .lineLimit(1)
                 .frame(width: 100)

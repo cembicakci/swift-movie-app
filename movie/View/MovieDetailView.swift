@@ -65,7 +65,12 @@ struct MovieDetailView: View {
                 ScrollView(.horizontal, showsIndicators: false) {
                     LazyHStack {
                         ForEach(model.castProfiles) { cast in
-                            CastView(cast: cast)
+                            NavigationLink {
+                                PersonView()
+                            } label: {
+                                CastView(cast: cast)
+                            }
+
                         }
                     }
                 }
