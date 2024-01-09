@@ -66,7 +66,7 @@ struct MovieDetailView: View {
                     LazyHStack {
                         ForEach(model.castProfiles) { cast in
                             NavigationLink {
-                                PersonView()
+                                PersonView(id: cast.id)
                             } label: {
                                 CastView(cast: cast)
                             }

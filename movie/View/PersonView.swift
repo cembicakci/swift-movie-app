@@ -8,12 +8,24 @@
 import SwiftUI
 
 struct PersonView: View {
+    
+    @StateObject var model = PersonViewModel()
+    
+    let id: Int
 
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        VStack {
+            if let person = model.person {
+                Text(person.name)
+                Text(person.birthday)
+            }
+        }
+        .task {
+            await model.loadPersonDetail(for: id)
+        }
     }
 }
 
 #Preview {
-    PersonView()
+    PersonView(id: 73421)
 }
