@@ -12,13 +12,15 @@ class MovieDiscoverViewModel: ObservableObject {
     
     @Published var trending: [Movie] = []
     @Published var searchResults: [Movie] = []
+    @Published var popular: [Movie] = []
+    @Published var upcoming: [Movie] = []
     
     func loadTrending() async {
         do {
             let trendingResults: TrendingResults = try await Network.request(endpoint: "trending/movie/day", responseType: TrendingResults.self)
             self.trending = trendingResults.results
         } catch {
-            print(error.localizedDescription)
+            print("loadTrending:", error.localizedDescription)
         }
     }
     
@@ -35,6 +37,24 @@ class MovieDiscoverViewModel: ObservableObject {
             self.searchResults = trendingResults.results
         } catch {
             print(error.localizedDescription)
+        }
+    }
+    
+    func loadPopular() async {
+        do {
+            let popularResults: TrendingResults = try await Network.request(endpoint: "movie/popular", responseType: TrendingResults.self)
+            self.popular = popularResults.results
+        } catch {
+            print("popularResults:", error.localizedDescription)
+        }
+    }
+    
+    func loadUpcoming() async {
+        do {
+            let upcomingResulte: TrendingResults = try await Network.request(endpoint: "movie/upcoming", responseType: TrendingResults.self)
+            self.upcoming = upcomingResulte.results
+        } catch {
+            print("upcomingResulte:", error.localizedDescription)
         }
     }
     

@@ -21,11 +21,6 @@ struct movieApp: App {
                     .tabItem {
                         Image(systemName: "heart.fill")
                     }
-                
-                Text("Tickets")
-                    .tabItem {
-                        Image(systemName: "bookmark.fill")
-                    }
             }
         }
     }

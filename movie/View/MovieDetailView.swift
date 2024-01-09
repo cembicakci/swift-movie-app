@@ -17,87 +17,68 @@ struct MovieDetailView: View {
     let headerHeight: CGFloat = 400
     
     var body: some View {
-        ZStack {
-            Color(red: 61/255, green: 61/255, blue: 88/255).ignoresSafeArea()
-
-            GeometryReader { geo in
-                VStack {
-                    AsyncImage(url: movie.backdropURL) { image in
-                        image
-                            .resizable()
-                            .scaledToFill()
-                            .frame(maxWidth: geo.size.width, maxHeight: headerHeight)
-                            .clipShape(RoundedRectangle(cornerRadius: 10))
-                    } placeholder: {
-                        ProgressView()
-                    }
-                    
-                    Spacer()
+        ScrollView {
+            
+            VStack {
+                AsyncImage(url: movie.backdropURL) { image in
+                    image
+                        .resizable()
+                        .scaledToFill()
+                        .clipShape(RoundedRectangle(cornerRadius: 10))
+                } placeholder: {
+                    ProgressView()
                 }
+                
+                Spacer()
             }
             
-            ScrollView {
-                VStack(spacing: 12) {
+            
+            VStack(spacing: 12) {
+                HStack {
+                    Text(movie.title)
+                        .font(.title)
+                        .fontWeight(.heavy)
+                    
                     Spacer()
-                        .frame(height: headerHeight)
-                    HStack {
-                        Text(movie.title)
-                            .font(.title)
-                            .fontWeight(.heavy)
-                        
-                        Spacer()
-                    }
-                    
-                    HStack {
-                    }
-                    
-                    HStack {
-                        Text("About Film")
-                            .font(.title3)
-                            .fontWeight(.bold)
-                        Spacer()
-                    }
-                    
-                    Text(movie.overview)
-                        .lineLimit(2)
-                        .foregroundColor(.secondary)
-                    
-                    
-                    HStack {
-                        Text("Cast & Crew")
-                            .font(.title3)
-                            .fontWeight(.bold)
-                        Spacer()
-                    }
-                    
-                    ScrollView(.horizontal, showsIndicators: false) {
-                        LazyHStack {
-                            ForEach(model.castProfiles) { cast in
-                                CastView(cast: cast)
-                            }
+                }
+                
+                
+                HStack {
+                    Text("About Film")
+                        .font(.title3)
+                        .fontWeight(.bold)
+                    Spacer()
+                }
+                
+                Text(movie.overview)
+                    .lineLimit(2)
+                    .foregroundColor(.secondary)
+                
+                
+                HStack {
+                    Text("Cast & Crew")
+                        .font(.title3)
+                        .fontWeight(.bold)
+                    Spacer()
+                }
+                
+                ScrollView(.horizontal, showsIndicators: false) {
+                    LazyHStack {
+                        ForEach(model.castProfiles) { cast in
+                            CastView(cast: cast)
                         }
                     }
-                    
                 }
-                .padding()
+                
             }
+            .padding()
         }
         .ignoresSafeArea()
-        .overlay(alignment: .topLeading) {
-            Button {
-                dismiss()
-            } label: {
-                Image(systemName: "chevron.left")
-                    .imageScale(.large)
-                    .fontWeight(.bold)
-            }
-            .padding(.leading)
-        }
+        
         .task {
             await model.movieCredits(for: movie.id)
             await model.loadCastProfiles()
         }
-        .toolbar(.hidden, for: .navigationBar)
     }
 }
 

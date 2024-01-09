@@ -13,7 +13,7 @@ class MovieDetailsViewModel: ObservableObject {
     @Published var credits: MovieCredits?
     @Published var cast: [MovieCredits.Cast] = []
     @Published var castProfiles: [CastProfile] = []
-        
+    
     func movieCredits(for movieId: Int) async {
         
         do {
@@ -22,7 +22,7 @@ class MovieDetailsViewModel: ObservableObject {
             self.cast = credits.cast.sorted(by: { $0.order < $1.order })
             
         } catch {
-            print(error.localizedDescription)
+            print("movieCredits:", error.localizedDescription)
         }
     }
     
@@ -34,7 +34,7 @@ class MovieDetailsViewModel: ObservableObject {
             }
         }
         catch {
-            print(error.localizedDescription)
+            print("loadCastProfiles:", error.localizedDescription)
         }
         
     }

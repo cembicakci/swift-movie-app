@@ -20,26 +20,78 @@ struct DiscoverView: View {
                         Text("No Results Found")
                             .foregroundColor(.white)
                     } else {
-                        HStack {
-                            Text("Trending")
-                                .font(.title)
-                                .foregroundColor(.white)
-                                .fontWeight(.heavy)
-                            Spacer()
-                        }
-                        .padding(.horizontal)
-                        ScrollView(.horizontal, showsIndicators: false) {
-                            HStack {
-                                ForEach(viewModel.trending) { item in
-                                    NavigationLink {
-                                        MovieDetailView(movie: item)
-                                    } label: {
-                                        TrendingCard(trendingItem: item)
-                                    }
+                        VStack(spacing: 32) {
+                            VStack {
+                                HStack {
+                                    Text("Trending")
+                                        .font(.title)
+                                        .foregroundColor(.white)
+                                        .fontWeight(.heavy)
+                                    Spacer()
+                                }
+                                .padding(.horizontal)
+                                ScrollView(.horizontal, showsIndicators: false) {
+                                    HStack {
+                                        ForEach(viewModel.trending) { item in
+                                            NavigationLink {
+                                                MovieDetailView(movie: item)
+                                            } label: {
+                                                TrendingCard(trendingItem: item)
+                                            }
 
+                                        }
+                                    }
+                                    .padding(.horizontal)
                                 }
                             }
-                            .padding(.horizontal)
+                            
+                            VStack {
+                                HStack {
+                                    Text("Popular")
+                                        .font(.title)
+                                        .foregroundColor(.white)
+                                        .fontWeight(.heavy)
+                                    Spacer()
+                                }
+                                .padding(.horizontal)
+                                ScrollView(.horizontal, showsIndicators: false) {
+                                    HStack {
+                                        ForEach(viewModel.popular) { item in
+                                            NavigationLink {
+                                                MovieDetailView(movie: item)
+                                            } label: {
+                                                TrendingCard(trendingItem: item)
+                                            }
+
+                                        }
+                                    }
+                                    .padding(.horizontal)
+                                }
+                            }
+                            
+                            VStack {
+                                HStack {
+                                    Text("Upcoming")
+                                        .font(.title)
+                                        .foregroundColor(.white)
+                                        .fontWeight(.heavy)
+                                    Spacer()
+                                }
+                                .padding(.horizontal)
+                                ScrollView(.horizontal, showsIndicators: false) {
+                                    HStack {
+                                        ForEach(viewModel.upcoming) { item in
+                                            NavigationLink {
+                                                MovieDetailView(movie: item)
+                                            } label: {
+                                                TrendingCard(trendingItem: item)
+                                            }
+
+                                        }
+                                    }
+                                    .padding(.horizontal)
+                                }
+                            }
                         }
                     }
                 } else {
@@ -100,6 +152,8 @@ struct DiscoverView: View {
         .onAppear {
             Task {
                 await viewModel.loadTrending()
+                await viewModel.loadPopular()
+                await viewModel.loadUpcoming()
             }
         }
     }
@@ -108,5 +162,15 @@ struct DiscoverView: View {
 
 
 #Preview {
-    DiscoverView()
+    TabView {
+        DiscoverView()
+            .tabItem {
+                Image(systemName: "popcorn")
+            }
+        
+        Text("Favs")
+            .tabItem {
+                Image(systemName: "heart.fill")
+            }
+    }
 }
