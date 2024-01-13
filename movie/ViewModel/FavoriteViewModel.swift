@@ -12,11 +12,12 @@ import Foundation
 class FavoriteViewModel: ObservableObject {
     
     @Published var favorites: [Movie] = []
-    
     func loadTrending() async {
         do {
-            let results: TrendingResults = try await Network.request(endpoint: "account/account_id/favorite/movies", responseType: TrendingResults.self)
-            print(results)
+            let results: TrendingResults = try await Network.request(
+                endpoint: "account/account_id/favorite/movies",
+                responseType: TrendingResults.self
+            )
             self.favorites = results.results
         } catch {
             print("loadTrending:", error.localizedDescription)

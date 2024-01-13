@@ -127,7 +127,7 @@ struct DiscoverView: View {
                             }
                         }
                         .padding()
-                        .background(Color(red: 61/255, green: 61/255, blue: 88/255))
+                        .background(Color(red: 30/255, green: 30/255, blue: 30/255))
                         .cornerRadius(20)
                         .padding(.horizontal)
 
@@ -137,7 +137,7 @@ struct DiscoverView: View {
             }
             .frame(maxWidth: .infinity)
             .background(
-                Color(red: 39/255, green: 40/255, blue: 59/255)
+                Color(red: 30/255, green: 30/255, blue: 30/255)
                     .ignoresSafeArea()
             )
         }

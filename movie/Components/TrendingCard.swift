@@ -21,7 +21,7 @@ struct TrendingCard: View {
                     .frame(width: 340, height: 200)
             } placeholder: {
                 Rectangle()
-                    .fill(Color(red: 61/255, green: 61/255, blue: 88/255))
+                    .fill(Color(red: 60/255, green: 60/255, blue: 60/255))
                     .frame(width: 340, height: 200)
             }
             
@@ -50,7 +50,7 @@ struct TrendingCard: View {
                 .foregroundColor(.yellow)
             }
             .padding()
-            .background(Color(red: 61/255, green: 61/255, blue: 88/255))
+            .background(Color(red: 60/255, green: 60/255, blue: 60/255))
         }
         .cornerRadius(10)
     }
