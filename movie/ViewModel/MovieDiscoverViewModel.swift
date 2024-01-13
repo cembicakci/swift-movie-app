@@ -58,4 +58,31 @@ class MovieDiscoverViewModel: ObservableObject {
         }
     }
     
+    struct FavoriteResponse: Decodable {
+        let status_message: String
+
+    }
+        
+    func addToFavourites(for id: Int) async {
+        let bodyData: [String: Any] = [
+            "media_type": "movie",
+            "movie_id": id,
+            "favourite": true
+        ]
+        
+        do {
+            let jsonData = try JSONSerialization.data(withJSONObject: bodyData)
+            let response: FavoriteResponse = try await Network.request(
+                endpoint: "account/\(id)/favorite",
+                method: .post,
+                body: jsonData,
+                responseType: FavoriteResponse.self
+            )
+            print("response", response)
+            
+        } catch {
+            print("addToFavorites error:", error.localizedDescription)
+
+        }
+    }
 }

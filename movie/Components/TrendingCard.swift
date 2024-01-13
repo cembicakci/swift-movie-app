@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct TrendingCard: View {
+    @StateObject var viewModel = MovieDiscoverViewModel()
     
     let trendingItem: Movie
     
@@ -30,7 +31,15 @@ struct TrendingCard: View {
                         .foregroundColor(.white)
                         .fontWeight(.heavy)
                     Spacer ()
-                    Image(systemName: "heart.fill")
+                    Button {
+                        Task {
+                            await viewModel.addToFavourites2(for: trendingItem.id)
+                        }
+                    } label: {
+                        Image(systemName: "heart.fill")
+                            .foregroundColor(.red)
+                    }
+
                 }
                 
                 HStack {

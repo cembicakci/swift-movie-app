@@ -22,6 +22,7 @@ enum HTTPMethod: String {
 struct Network {
     static let apiKey = "409d993d44e607bd146c738c9df97a95"
     static let baseURL = "https://api.themoviedb.org/3/"
+    static let token = "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI0MDlkOTkzZDQ0ZTYwN2JkMTQ2YzczOGM5ZGY5N2E5NSIsInN1YiI6IjYyMDNmYjRkNGRmMjkxMDA2OTFjM2M5MyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.DDE74BuHNhMq6eeElOXjNTkLHaBwPgPZBc_jCHjZXWg"
     
     static func request<T: Decodable>(
         endpoint: String,
@@ -40,9 +41,16 @@ struct Network {
         var request = URLRequest(url: url)
         request.httpMethod = method.rawValue
         
+        let headers = [
+          "accept": "application/json",
+          "content-type": "application/json",
+          "Authorization": "Bearer \(token)"
+        ]
+        request.allHTTPHeaderFields = headers
+
+        
         if let body = body {
             request.httpBody = body
-            request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         }
         
         do {
