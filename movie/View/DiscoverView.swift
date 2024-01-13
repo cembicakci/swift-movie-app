@@ -168,7 +168,7 @@ struct DiscoverView: View {
                 Image(systemName: "popcorn")
             }
         
-        Text("Favs")
+        FavoriteView()
             .tabItem {
                 Image(systemName: "heart.fill")
             }

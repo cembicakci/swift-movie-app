@@ -78,7 +78,6 @@ class MovieDiscoverViewModel: ObservableObject {
                 body: jsonData,
                 responseType: FavoriteResponse.self
             )
-            print("response", response)
             
         } catch {
             print("addToFavorites error:", error.localizedDescription)

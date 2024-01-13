@@ -32,8 +32,8 @@ struct Network {
         responseType: T.Type
     ) async throws -> T {
         var components = URLComponents(string: baseURL + endpoint)
-        components?.queryItems = queryItems + [URLQueryItem(name: "", value: apiKey)]
-        
+        components?.queryItems = queryItems + [URLQueryItem(name: "api_key", value: apiKey)]
+
         guard let url = components?.url else {
             throw NetworkError.invalidURL
         }
@@ -42,12 +42,12 @@ struct Network {
         request.httpMethod = method.rawValue
         
         let headers = [
-          "accept": "application/json",
-          "content-type": "application/json",
-          "Authorization": "Bearer \(token)"
+            "accept": "application/json",
+            "content-type": "application/json",
+            "Authorization": "Bearer \(token)"
         ]
         request.allHTTPHeaderFields = headers
-
+        
         
         if let body = body {
             request.httpBody = body as Data
@@ -55,40 +55,6 @@ struct Network {
         
         do {
             let (data, response) = try await URLSession.shared.data(for: request)
-            print(response)
-            return try JSONDecoder().decode(responseType, from: data)
-        } catch {
-            throw NetworkError.requestFailed(error)
-        }
-    }
-    
-    static func request2<T: Decodable>(
-        endpoint: String,
-        method: HTTPMethod = .get,
-        queryItems: [URLQueryItem] = [],
-        body: Data? = nil,
-        responseType: T.Type
-    ) async throws -> T {
-        
-        let request = NSMutableURLRequest(url: NSURL(string: endpoint)! as URL,
-                                                cachePolicy: .useProtocolCachePolicy,
-                                            timeoutInterval: 10.0)
-        
-        request.httpMethod = method.rawValue
-        
-        let headers = [
-          "accept": "application/json",
-          "content-type": "application/json",
-          "Authorization": "Bearer \(token)"
-        ]
-        request.allHTTPHeaderFields = headers
-        
-        if let body = body {
-            request.httpBody = body as Data
-        }
-        
-        do {
-            let (data, response) = try await URLSession.shared.data(for: request as URLRequest)
             print(response)
             return try JSONDecoder().decode(responseType, from: data)
         } catch {

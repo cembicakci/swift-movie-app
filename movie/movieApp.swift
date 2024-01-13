@@ -17,7 +17,7 @@ struct movieApp: App {
                         Image(systemName: "popcorn")
                     }
                 
-                Text("Favs")
+                FavoriteView()
                     .tabItem {
                         Image(systemName: "heart.fill")
                     }
