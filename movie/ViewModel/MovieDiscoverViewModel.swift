@@ -62,12 +62,12 @@ class MovieDiscoverViewModel: ObservableObject {
         let status_message: String
 
     }
-        
+    
     func addToFavourites(for id: Int) async {
         let bodyData: [String: Any] = [
             "media_type": "movie",
-            "movie_id": id,
-            "favourite": true
+            "media_id": id,
+            "favorite": true
         ]
         
         do {

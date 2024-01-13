@@ -33,7 +33,7 @@ struct TrendingCard: View {
                     Spacer ()
                     Button {
                         Task {
-                            await viewModel.addToFavourites2(for: trendingItem.id)
+                            await viewModel.addToFavourites(for: trendingItem.id)
                         }
                     } label: {
                         Image(systemName: "heart.fill")
