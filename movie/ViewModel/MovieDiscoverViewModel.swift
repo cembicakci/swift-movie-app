@@ -9,7 +9,7 @@ import Foundation
 
 @MainActor
 class MovieDiscoverViewModel: ObservableObject {
-    
+        
     @Published var trending: [Movie] = []
     @Published var searchResults: [Movie] = []
     @Published var popular: [Movie] = []
@@ -65,8 +65,8 @@ class MovieDiscoverViewModel: ObservableObject {
                 endpoint: "account/account_id/favorite/movies",
                 responseType: TrendingResults.self
             )
-            
             self.favorites = results.results
+            print("favorites", favorites)
         } catch {
             print("loadTrending:", error.localizedDescription)
         }
@@ -82,6 +82,28 @@ class MovieDiscoverViewModel: ObservableObject {
             "media_type": "movie",
             "media_id": id,
             "favorite": true
+        ]
+        
+        do {
+            let jsonData = try JSONSerialization.data(withJSONObject: bodyData)
+            let _: FavoriteResponse = try await Network.request(
+                endpoint: "account/\(id)/favorite",
+                method: .post,
+                body: jsonData,
+                responseType: FavoriteResponse.self
+            )
+            
+        } catch {
+            print("addToFavorites error:", error.localizedDescription)
+            
+        }
+    }
+    
+    func deleteFromFavorites(for id: Int) async {
+        let bodyData: [String: Any] = [
+            "media_type": "movie",
+            "media_id": id,
+            "favorite": false
         ]
         
         do {

@@ -36,7 +36,10 @@ struct DiscoverView: View {
                                             NavigationLink {
                                                 MovieDetailView(movie: item)
                                             } label: {
-                                                TrendingCard(trendingItem: item)
+                                                TrendingCard(
+                                                    trendingItem: item,
+                                                    favorites: viewModel.favorites
+                                                )
                                             }
 
                                         }
@@ -60,7 +63,10 @@ struct DiscoverView: View {
                                             NavigationLink {
                                                 MovieDetailView(movie: item)
                                             } label: {
-                                                TrendingCard(trendingItem: item)
+                                                TrendingCard(
+                                                    trendingItem: item,
+                                                    favorites: viewModel.favorites
+                                                )
                                             }
 
                                         }
@@ -84,7 +90,10 @@ struct DiscoverView: View {
                                             NavigationLink {
                                                 MovieDetailView(movie: item)
                                             } label: {
-                                                TrendingCard(trendingItem: item)
+                                                TrendingCard(
+                                                    trendingItem: item,
+                                                    favorites: viewModel.favorites
+                                                )
                                             }
 
                                         }

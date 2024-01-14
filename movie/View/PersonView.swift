@@ -14,12 +14,45 @@ struct PersonView: View {
     let id: Int
 
     var body: some View {
-        VStack {
+        ScrollView {
             if let person = model.person {
-                Text(person.name)
-                Text(person.birthday)
+                HStack(spacing: 20) {
+                    AsyncImage(url: model.person?.poster) { image in
+                        image
+                            .image?.resizable()
+                            .scaledToFill()
+                            .frame(width: 140, height: 200)
+                            .clipShape(RoundedRectangle(cornerRadius: 15))
+                    }
+                }
+                
+                VStack(alignment: .leading, spacing: 12) {
+                    
+                    HStack {
+                        Text("Birth Place:")
+                            .font(.title3)
+                            .fontWeight(.regular)
+                        Text(person.place_of_birth)
+                    }
+                    
+                    HStack {
+                        Text("Birthday:")
+                            .font(.title3)
+                            .fontWeight(.regular)
+                        Text(person.birthday)
+                    }
+                    
+                    Text("Biography:")
+                        .font(.title3)
+                    Text(person.biography)
+                }
+                .navigationTitle(person.name)
+                .padding()
             }
+            
+            Spacer()
         }
+
         .task {
             await model.loadPersonDetail(for: id)
         }

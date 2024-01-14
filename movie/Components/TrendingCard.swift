@@ -11,6 +11,7 @@ struct TrendingCard: View {
     @StateObject var viewModel = MovieDiscoverViewModel()
     
     let trendingItem: Movie
+    let favorites: [Movie]
     
     var body: some View {
         ZStack(alignment: .bottom) {
@@ -33,12 +34,17 @@ struct TrendingCard: View {
                     Spacer ()
                     Button {
                         Task {
-                            await viewModel.addToFavourites(for: trendingItem.id)
-                        }
+                            if  favorites.contains(where: { $0.id == trendingItem.id })  {
+                                await viewModel.deleteFromFavorites(for: trendingItem.id)
+                            } else {
+                                await viewModel.addToFavourites(for: trendingItem.id)
+                            }
+                            
+                                                    }
                     } label: {
                         Image(systemName:  "heart.fill")
                             .foregroundColor(
-                                viewModel.isFavourite(for: trendingItem) ? .red : .accentColor
+                                favorites.contains(where: { $0.id == trendingItem.id }) ? .red : .accentColor
                             )
                     }
                 }
