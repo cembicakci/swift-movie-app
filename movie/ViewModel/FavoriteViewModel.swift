@@ -12,6 +12,7 @@ import Foundation
 class FavoriteViewModel: ObservableObject {
     
     @Published var favorites: [Movie] = []
+    
     func loadTrending() async {
         do {
             let results: TrendingResults = try await Network.request(
@@ -23,4 +24,4 @@ class FavoriteViewModel: ObservableObject {
             print("loadTrending:", error.localizedDescription)
         }
     }
-    }
+}

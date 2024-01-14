@@ -14,6 +14,7 @@ class MovieDiscoverViewModel: ObservableObject {
     @Published var searchResults: [Movie] = []
     @Published var popular: [Movie] = []
     @Published var upcoming: [Movie] = []
+    @Published var favorites: [Movie] = []
     
     func loadTrending() async {
         do {
@@ -58,9 +59,22 @@ class MovieDiscoverViewModel: ObservableObject {
         }
     }
     
+    func loadFavourites() async {
+        do {
+            let results: TrendingResults = try await Network.request(
+                endpoint: "account/account_id/favorite/movies",
+                responseType: TrendingResults.self
+            )
+            
+            self.favorites = results.results
+        } catch {
+            print("loadTrending:", error.localizedDescription)
+        }
+    }
+    
     struct FavoriteResponse: Decodable {
         let status_message: String
-
+        
     }
     
     func addToFavourites(for id: Int) async {
@@ -72,7 +86,7 @@ class MovieDiscoverViewModel: ObservableObject {
         
         do {
             let jsonData = try JSONSerialization.data(withJSONObject: bodyData)
-            let response: FavoriteResponse = try await Network.request(
+            let _: FavoriteResponse = try await Network.request(
                 endpoint: "account/\(id)/favorite",
                 method: .post,
                 body: jsonData,
@@ -81,7 +95,11 @@ class MovieDiscoverViewModel: ObservableObject {
             
         } catch {
             print("addToFavorites error:", error.localizedDescription)
-
+            
         }
+    }
+    
+    func isFavourite(for movie: Movie) -> Bool {
+        return favorites.contains(where: { $0.id == movie.id })
     }
 }

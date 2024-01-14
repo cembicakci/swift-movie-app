@@ -54,8 +54,7 @@ struct Network {
         }
         
         do {
-            let (data, response) = try await URLSession.shared.data(for: request)
-            print(response)
+            let (data, _) = try await URLSession.shared.data(for: request)
             return try JSONDecoder().decode(responseType, from: data)
         } catch {
             throw NetworkError.requestFailed(error)

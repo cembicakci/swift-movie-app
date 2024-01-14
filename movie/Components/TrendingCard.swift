@@ -36,10 +36,11 @@ struct TrendingCard: View {
                             await viewModel.addToFavourites(for: trendingItem.id)
                         }
                     } label: {
-                        Image(systemName: "heart.fill")
-                            .foregroundColor(.red)
+                        Image(systemName:  "heart.fill")
+                            .foregroundColor(
+                                viewModel.isFavourite(for: trendingItem) ? .red : .accentColor
+                            )
                     }
-
                 }
                 
                 HStack {

@@ -154,6 +154,7 @@ struct DiscoverView: View {
                 await viewModel.loadTrending()
                 await viewModel.loadPopular()
                 await viewModel.loadUpcoming()
+                await viewModel.loadFavourites()
             }
         }
     }
